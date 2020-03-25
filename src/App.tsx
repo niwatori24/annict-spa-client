@@ -7,8 +7,13 @@ function App() {
     <div className="App">
       <div>
         header menu
+        <ul>
+          <li><a href='/'>main</a></li>
+          <li><a href='/abount'>abount</a></li>
+          <li><a href='/mypage'>mypage</a></li>
+        </ul>
       </div>
-      <Menu></Menu>
+      <Menu/>
       <div>
         <p>Annict SPA Client</p>
       </div>
