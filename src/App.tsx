@@ -1,23 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Menu } from './Menu'
+import { MainContent } from './MainContent'
+import { About } from './About'
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams
+} from 'react-router-dom'
+
 
 function App() {
   return (
-    <div className="App">
-      <div>
-        header menu
-        <ul>
-          <li><a href='/'>main</a></li>
-          <li><a href='/abount'>abount</a></li>
-          <li><a href='/mypage'>mypage</a></li>
-        </ul>
+    <Router>
+      <div className="App">
+        <div>
+          <ul>
+            <li>
+              <Link to='/'>main</Link>
+            </li>
+            <li>
+              <Link to='/about'>about</Link>
+            </li>
+          </ul>
+        </div>
+
+        <Switch>
+          <Route path='/about'>
+            <About/>
+          </Route>
+          <Route path='/'>
+            <MainContent/>
+          </Route>
+        </Switch>
       </div>
-      <Menu/>
-      <div>
-        <p>Annict SPA Client</p>
-      </div>
-    </div>
+    </Router>
   );
 }
 
