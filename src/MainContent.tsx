@@ -13,6 +13,8 @@ interface Work {
 
 export const MainContent: React.FC = () => {
   const [workList, setWorkList] = useState<Work[]>([]);
+  const [currentWork, setCurrentWork] = useState({ id: 0, title: '' });
+
   const getWorks = () => {
     var url = `https://api.annict.com/v1/works?access_token=${process.env.REACT_APP_ANNICT_API_TOKEN}`
     axios.get(url, {}).then((res) => {
@@ -31,10 +33,20 @@ export const MainContent: React.FC = () => {
     getWorks();
   }, []);
 
+  const HandleClickTitle = (e: any) => {
+    console.log(
+      'clicked',
+      currentWork,
+      e.target,
+      e.target.data,
+    )
+    return
+  }
+
   return (
     <div style={{ display: 'flex', width: '700px' }}>
-      <MainContentMenu workList={workList} />
-      <MainContentBody />
+      <MainContentMenu workList={workList} setCurrentWork={HandleClickTitle} />
+      <MainContentBody currentWork={currentWork} />
     </div>
   )
 }
