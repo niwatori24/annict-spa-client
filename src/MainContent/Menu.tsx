@@ -15,8 +15,8 @@ export const MainContentMenu: React.FC<Props> = props => {
     <div style={{ flex: 1, background: 'red' }}>
       <ul>
         { props.workList.map((work, i) => {
-            console.log('work', work);
             return <li
+              key={work.id}
               data-hoge={"123"}
               onClick={() => props.setCurrentWork(work)}
             >{work.title}</li>

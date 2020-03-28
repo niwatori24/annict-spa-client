@@ -24,7 +24,7 @@ export const MainContent: React.FC = () => {
       res.data.works.map((w: any, i: number) => {
         list.push({ id: w.id, title: w.title });
       });
-      console.log('done getWorks!! with:', list);
+      // console.log('done getWorks!! with:', list);
       setWorkList((prev) => {
         return list;
       });
