@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function MainContentBody() {
+export const MainContentBody: React.FC = () => {
   return (
     <div style={{ flex: 1, background: 'yellow' }}>コンテンテンツ2</div>
   )
