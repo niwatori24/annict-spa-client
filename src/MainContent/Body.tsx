@@ -1,9 +1,6 @@
 import React from 'react';
-
-interface Work {
-  id: number
-  title: string
-};
+import { EmptyBody } from './EmptyBody'
+import { Work } from './../Work'
 
 interface Props {
   currentWork: Work

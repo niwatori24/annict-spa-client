@@ -1,9 +1,5 @@
 import React from 'react';
-
-interface Work {
-  id: number
-  title: string
-};
+import { Work } from './../Work'
 
 interface Props {
   workList: Work[]
