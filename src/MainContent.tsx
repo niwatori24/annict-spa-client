@@ -1,6 +1,8 @@
 import React, {
   useState,
-  useEffect
+  useEffect,
+  useCallback,
+  useRef
 } from 'react';
 import { MainContentMenu } from './MainContent/Menu'
 import { MainContentBody} from './MainContent/Body'
@@ -33,19 +35,18 @@ export const MainContent: React.FC = () => {
     getWorks();
   }, []);
 
-  const HandleClickTitle = (e: any) => {
-    console.log(
-      'clicked',
-      currentWork,
-      e.target,
-      e.target.data,
-    )
-    return
-  }
+  const setCurrentWorkFromMenu = useCallback((work: Work) => {
+    setCurrentWork(prev => (
+      { id: work.id, title: work.title }
+    ))
+  }, [])
 
   return (
     <div style={{ display: 'flex', width: '700px' }}>
-      <MainContentMenu workList={workList} setCurrentWork={HandleClickTitle} />
+      <MainContentMenu
+        workList={workList}
+        setCurrentWork={setCurrentWorkFromMenu}
+      />
       <MainContentBody currentWork={currentWork} />
     </div>
   )

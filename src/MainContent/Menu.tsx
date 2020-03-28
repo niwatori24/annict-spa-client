@@ -7,12 +7,10 @@ interface Work {
 
 interface Props {
   workList: Work[]
-  setCurrentWork: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+  setCurrentWork: Function
 }
 
 export const MainContentMenu: React.FC<Props> = props => {
-  console.log(props.workList);
-
   return (
     <div style={{ flex: 1, background: 'red' }}>
       <ul>
@@ -20,7 +18,7 @@ export const MainContentMenu: React.FC<Props> = props => {
             console.log('work', work);
             return <li
               data-hoge={"123"}
-              onClick={props.setCurrentWork}
+              onClick={() => props.setCurrentWork(work)}
             >{work.title}</li>
           })
         }
