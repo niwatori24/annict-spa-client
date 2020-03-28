@@ -11,6 +11,10 @@ interface Props {
 }
 
 export const MainContentMenu: React.FC<Props> = props => {
+  const handleClick = (work: Work) => {
+    props.setCurrentWork(() => ({ id: work.id, title: work.title }))
+  }
+
   return (
     <div style={{ flex: 1, background: 'red' }}>
       <ul>
@@ -18,9 +22,7 @@ export const MainContentMenu: React.FC<Props> = props => {
             return <li
               key={work.id}
               data-hoge={"123"}
-              onClick={() =>
-                props.setCurrentWork(() => ({ id: work.id, title: work.title }))
-              }
+              onClick={() => { handleClick(work) }}
             >{work.title}</li>
           })
         }
