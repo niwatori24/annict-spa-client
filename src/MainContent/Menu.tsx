@@ -13,7 +13,6 @@ export const MainContentMenu: React.FC<Props> = props => {
   console.log(props.workList);
   return (
     <div style={{ flex: 1, background: 'red' }}>
-      リストです
       <ul>
         { props.workList.map((work, i) => {
            console.log('work', work);
