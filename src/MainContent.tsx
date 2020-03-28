@@ -33,19 +33,13 @@ export const MainContent: React.FC = () => {
 
   useEffect(() => {
     getWorks();
-  }, []);
-
-  const setCurrentWorkFromMenu = useCallback((work: Work) => {
-    setCurrentWork(prev => (
-      { id: work.id, title: work.title }
-    ))
   }, [])
 
   return (
     <div style={{ display: 'flex', width: '700px' }}>
       <MainContentMenu
         workList={workList}
-        setCurrentWork={setCurrentWorkFromMenu}
+        setCurrentWork={setCurrentWork}
       />
       <MainContentBody currentWork={currentWork} />
     </div>

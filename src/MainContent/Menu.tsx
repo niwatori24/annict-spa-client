@@ -18,7 +18,9 @@ export const MainContentMenu: React.FC<Props> = props => {
             return <li
               key={work.id}
               data-hoge={"123"}
-              onClick={() => props.setCurrentWork(work)}
+              onClick={() =>
+                props.setCurrentWork(() => ({ id: work.id, title: work.title }))
+              }
             >{work.title}</li>
           })
         }
