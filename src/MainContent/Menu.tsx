@@ -23,7 +23,7 @@ export const MainContentMenu: React.FC<Props> = props => {
               key={work.id}
               data-hoge={"123"}
               onClick={() => { handleClick(work) }}
-            >{work.title}</li>
+            ><a href='javascript: return false'>{work.title}</a></li>
           })
         }
       </ul>
