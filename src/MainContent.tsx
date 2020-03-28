@@ -1,9 +1,12 @@
 import React from 'react';
+import { MainContentMenu } from './MainContent/Menu'
+import { MainContentBody} from './MainContent/Body'
 
 export function MainContent() {
   return (
-    <div>
-      <p>ひだりにアニメ一覧が出て、クリックすると右に詳細画面が表示される</p>
+    <div style={{ display: 'flex', width: '700px' }}>
+      <MainContentMenu />
+      <MainContentBody />
     </div>
   )
 }
