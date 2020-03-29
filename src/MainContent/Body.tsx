@@ -16,6 +16,7 @@ interface Props {
 export const MainContentBody: React.FC<Props> = props => {
   const [episodes, setEpisodes] = useState<Episode[]>([])
   useEffect(() => {
+    setEpisodes((prev) => { return [] });
     getEpisodes()
   }, [props.currentWork ? props.currentWork.id : props.currentWork]);
 
@@ -28,7 +29,7 @@ export const MainContentBody: React.FC<Props> = props => {
         list.push({ id: w.id, title: w.title });
       });
       setEpisodes((prev) => {
-        return list;
+        return list
       });
     }).catch(console.error);
   }
