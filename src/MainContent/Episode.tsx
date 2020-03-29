@@ -11,11 +11,18 @@ interface Props {
 
 export const MainContentEpisode: React.FC<Props> = props => {
   return (
-    <ul>
-      { props.episodes.map((episode, i) => {
-          return <li key={episode.id} >{episode.title}</li>
-        })
-      }
-    </ul>
+    <div>
+      {props.episodes.length > 0 && (
+        <ul>
+          { props.episodes.map((episode, i) => {
+            return <li key={episode.id} >{episode.title}</li>
+          })
+          }
+        </ul>
+      )}
+      {props.episodes.length === 0 && (
+        <div>エピソードはありません。</div>
+      )}
+    </div>
   )
 }
