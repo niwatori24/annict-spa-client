@@ -4,16 +4,13 @@ import React, {
   useState
 } from 'react';
 import { EmptyBody } from './EmptyBody'
-import { MainContentEpisode as Episode } from './Episode'
+import { MainContentEpisode } from './Episode'
 import { Work } from './../types/Work'
+import { Episode } from './../types/Episode'
 import axios from 'axios'
 
 interface Props {
   currentWork: Work | null
-}
-interface Episode {
-  id: number
-  title: string
 }
 
 export const MainContentBody: React.FC<Props> = props => {
@@ -42,7 +39,7 @@ export const MainContentBody: React.FC<Props> = props => {
         <div>
           <div>id: {props.currentWork.id}</div>
           <div>title: {props.currentWork.title}</div>
-          <Episode episodes={episodes} />
+          <MainContentEpisode episodes={episodes} />
         </div>
       )}
       {props.currentWork === null && <EmptyBody />}

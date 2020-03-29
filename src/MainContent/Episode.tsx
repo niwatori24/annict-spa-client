@@ -3,11 +3,7 @@ import React, {
   useEffect,
   useState
 } from 'react';
-
-interface Episode {
-  id: number
-  title: string
-}
+import { Episode } from './../types/Episode'
 
 interface Props {
   episodes: Episode[]
