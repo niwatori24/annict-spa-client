@@ -9,7 +9,7 @@ import { Work } from './../Work'
 import axios from 'axios'
 
 interface Props {
-  currentWork: Work
+  currentWork: Work | null
 }
 interface Episode {
   id: number
@@ -20,10 +20,10 @@ export const MainContentBody: React.FC<Props> = props => {
   const [episodes, setEpisodes] = useState<Episode[]>([])
   useEffect(() => {
     getEpisodes()
-  }, [props.currentWork.id]);
+  }, [props.currentWork ? props.currentWork.id : props.currentWork]);
 
   const getEpisodes = () => {
-    if(props.currentWork.id === 0) { return }
+    if(props.currentWork === null) { return }
     const url: string = `https://api.annict.com/v1/episodes?access_token=${process.env.REACT_APP_ANNICT_API_TOKEN}&filter_work_id=${props.currentWork.id}`
     axios.get(url, {}).then((res) => {
       const list: Episode[] = [];
@@ -38,14 +38,14 @@ export const MainContentBody: React.FC<Props> = props => {
 
   return (
     <div style={{ flex: 1, background: 'yellow' }}>
-      {props.currentWork.id > 0 && (
+      {props.currentWork && (
         <div>
           <div>id: {props.currentWork.id}</div>
           <div>title: {props.currentWork.title}</div>
           <Episode episodes={episodes} />
         </div>
       )}
-      {props.currentWork.id === 0 && <EmptyBody />}
+      {props.currentWork === null && <EmptyBody />}
     </div>
   )
 }

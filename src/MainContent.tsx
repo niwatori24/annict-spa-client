@@ -11,7 +11,7 @@ import { Work } from './Work'
 
 export const MainContent: React.FC = () => {
   const [workList, setWorkList] = useState<Work[]>([]);
-  const [currentWork, setCurrentWork] = useState({ id: 0, title: '' });
+  const [currentWork, setCurrentWork] = useState(null);
 
   const getWorks = () => {
     const url = `https://api.annict.com/v1/works?access_token=${process.env.REACT_APP_ANNICT_API_TOKEN}`
