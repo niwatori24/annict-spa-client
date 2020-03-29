@@ -1,5 +1,5 @@
 import React from 'react';
-import { Work } from './../Work'
+import { Work } from './../types/Work'
 
 interface Props {
   workList: Work[]

@@ -7,7 +7,7 @@ import React, {
 import { MainContentMenu } from './MainContent/Menu'
 import { MainContentBody} from './MainContent/Body'
 import axios from 'axios';
-import { Work } from './Work'
+import { Work } from './types/Work'
 
 export const MainContent: React.FC = () => {
   const [workList, setWorkList] = useState<Work[]>([]);

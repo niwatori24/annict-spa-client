@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import { EmptyBody } from './EmptyBody'
 import { MainContentEpisode as Episode } from './Episode'
-import { Work } from './../Work'
+import { Work } from './../types/Work'
 import axios from 'axios'
 
 interface Props {
