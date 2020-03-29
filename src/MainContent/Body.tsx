@@ -14,10 +14,12 @@ interface Props {
   currentWork: Work | null
 }
 
+type EpisodeList = Episode[] | null
+
 export const MainContentBody: React.FC<Props> = props => {
-  const [episodes, setEpisodes] = useState<Episode[]>([])
+  const [episodes, setEpisodes] = useState<EpisodeList>([])
   useEffect(() => {
-    setEpisodes((prev) => { return [] });
+    setEpisodes((prev) => { return null });
     getEpisodes()
   }, [props.currentWork ? props.currentWork.id : props.currentWork]);
 
@@ -25,13 +27,12 @@ export const MainContentBody: React.FC<Props> = props => {
     if(props.currentWork === null) { return }
     const url: string = AnnictAPI.episodesUrl(props.currentWork.id)
     axios.get(url, {}).then((res) => {
-      const list: Episode[] = [];
+      let list: EpisodeList = [];
       res.data.episodes.map((w: any, i: number) => {
-        list.push({ id: w.id, title: w.title });
+        if(list === null) { return }
+        list.push({ id: w.id, title: w.title })
       });
-      setEpisodes((prev) => {
-        return list
-      });
+      setEpisodes((prev) => (list))
     }).catch(console.error);
   }
 
