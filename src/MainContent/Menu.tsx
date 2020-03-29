@@ -18,7 +18,6 @@ export const MainContentMenu: React.FC<Props> = props => {
         { props.workList.map((work, i) => {
             return <li
               key={work.id}
-              data-hoge={"123"}
               onClick={() => { handleClick(work)  }}
             ><a href='#'>{work.title}</a></li>
           })
