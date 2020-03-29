@@ -8,6 +8,7 @@ import { MainContentEpisode } from './Episode'
 import { Work } from './../types/Work'
 import { Episode } from './../types/Episode'
 import axios from 'axios'
+import { AnnictAPI } from './../AnnictAPI'
 
 interface Props {
   currentWork: Work | null
@@ -22,7 +23,7 @@ export const MainContentBody: React.FC<Props> = props => {
 
   const getEpisodes = () => {
     if(props.currentWork === null) { return }
-    const url: string = `https://api.annict.com/v1/episodes?access_token=${process.env.REACT_APP_ANNICT_API_TOKEN}&filter_work_id=${props.currentWork.id}`
+    const url: string = AnnictAPI.episodesUrl(props.currentWork.id)
     axios.get(url, {}).then((res) => {
       const list: Episode[] = [];
       res.data.episodes.map((w: any, i: number) => {
