@@ -1,5 +1,5 @@
 import React from 'react';
-import { Work } from './../Work'
+import { Work } from './../types/Work'
 
 interface Props {
   workList: Work[]
@@ -9,7 +9,6 @@ interface Props {
 export const MainContentMenu: React.FC<Props> = props => {
   const handleClick = (work: Work) => {
     props.setCurrentWork(() => ({ id: work.id, title: work.title }))
-    return false
   }
 
   return (
@@ -18,8 +17,7 @@ export const MainContentMenu: React.FC<Props> = props => {
         { props.workList.map((work, i) => {
             return <li
               key={work.id}
-              data-hoge={"123"}
-              onClick={() => { handleClick(work)  }}
+              onClick={(e) => { handleClick(work); e.preventDefault(); }}
             ><a href='#'>{work.title}</a></li>
           })
         }
