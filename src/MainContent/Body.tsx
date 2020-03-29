@@ -10,8 +10,10 @@ export const MainContentBody: React.FC<Props> = props => {
   return (
     <div style={{ flex: 1, background: 'yellow' }}>
       {props.currentWork.id > 0 && (
-        <p>id: {props.currentWork.id}<br />
-        title: {props.currentWork.title}</p>
+        <div>
+          <div>id: {props.currentWork.id}</div>
+          <div>title: {props.currentWork.title}</div>
+        </div>
       )}
       {props.currentWork.id === 0 && <EmptyBody />}
     </div>
