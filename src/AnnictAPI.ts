@@ -4,12 +4,14 @@ interface AnnictAPIType {
 }
 
 export const AnnictAPI: AnnictAPIType = {
-  episodesUrl: (workId: number) => {
-    const url: string = `https://api.annict.com/v1/episodes?access_token=${process.env.REACT_APP_ANNICT_API_TOKEN}&filter_work_id=${workId}`
-    return url
+  episodesUrl: (workId: number, page: number | null) => {
+    if(page === null) {
+      return `https://api.annict.com/v1/episodes?access_token=${process.env.REACT_APP_ANNICT_API_TOKEN}&filter_work_id=${workId}`
+    } else {
+      return `https://api.annict.com/v1/episodes?access_token=${process.env.REACT_APP_ANNICT_API_TOKEN}&filter_work_id=${workId}&page=${page}`
+    }
   },
   worksUrl: () => {
-    const url = `https://api.annict.com/v1/works?access_token=${process.env.REACT_APP_ANNICT_API_TOKEN}`
-    return url
+    return `https://api.annict.com/v1/works?access_token=${process.env.REACT_APP_ANNICT_API_TOKEN}`
   }
 }

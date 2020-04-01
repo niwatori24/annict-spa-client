@@ -7,6 +7,8 @@ interface Pagination {
 }
 interface Props {
   pagination: PaginationType
+  nextPageHandleClick: Function
+  prevPageHandleClick: Function
 }
 type PaginationType = Pagination | null
 
@@ -17,8 +19,12 @@ export const PaginationComponent: React.FC<Props> = props => {
         <>
           <div>全ページ数: {props.pagination.totalCount}</div>
           <div>
-            {props.pagination.prevPage && (<div>前のエピソードを見る</div>)}
-            {props.pagination.nextPage && (<div>次のエピソードを見る</div>)}
+            {props.pagination.prevPage && (
+              <div><a onClick={(e) => {props.prevPageHandleClick(); e.preventDefault()}}>前のエピソードを見る</a></div>
+            )}
+            {props.pagination.nextPage && (
+              <div><a onClick={(e) => {props.nextPageHandleClick(); e.preventDefault()}}>次のエピソードを見る</a></div>
+            )}
           </div>
         </>
       )}

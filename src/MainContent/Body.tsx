@@ -32,13 +32,13 @@ export const MainContentBody: React.FC<Props> = props => {
 
   useEffect(() => {
     setEpisodes((prev) => { return null });
-    getEpisodes()
+    getEpisodes(1)
   }, [props.currentWork ? props.currentWork.id : props.currentWork]);
 
-  const getEpisodes = () => {
+  const getEpisodes = (page: number) => {
     if(props.currentWork === null) { return }
     setPagination(prev => (null))
-    const url: string = AnnictAPI.episodesUrl(props.currentWork.id)
+    const url: string = AnnictAPI.episodesUrl(props.currentWork.id, page)
     axios.get(url, {}).then((res) => {
       let list: EpisodeList = [];
       console.log('episodeUrl res.data:', res.data)
@@ -55,14 +55,32 @@ export const MainContentBody: React.FC<Props> = props => {
     }).catch(console.error);
   }
 
+  const prevPageHandleClick = () => {
+    getEpisodes(1)
+  }
+
+  const nextPageHandleClick = () => {
+    getEpisodes(2)
+  }
+
+
   return (
     <div style={{ flex: 1, background: 'yellow' }}>
       {props.currentWork && (
         <div>
           <div>id: {props.currentWork.id}</div>
           <div>title: {props.currentWork.title}</div>
+          <PaginationComponent
+            pagination={pagination}
+            nextPageHandleClick={nextPageHandleClick}
+            prevPageHandleClick={prevPageHandleClick}
+          />
           <MainContentEpisode episodes={episodes} />
-          <PaginationComponent pagination={pagination} />
+          <PaginationComponent
+            pagination={pagination}
+            nextPageHandleClick={nextPageHandleClick}
+            prevPageHandleClick={prevPageHandleClick}
+          />
         </div>
       )}
       {props.currentWork === null && <EmptyBody />}
