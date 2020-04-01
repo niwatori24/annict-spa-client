@@ -17,6 +17,9 @@ function App() {
     <Router>
       <div className="App">
         <div>
+          <div>
+            Annict SPA Client
+          </div>
           <ul>
             <li>
               <Link to='/'>main</Link>
