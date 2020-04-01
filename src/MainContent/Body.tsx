@@ -56,14 +56,14 @@ export const MainContentBody: React.FC<Props> = props => {
     }).catch(console.error);
   }
 
-  const prevPageHandleClick = () => {
+  const prevPageHandleClick = (page: number) => {
     resetContent()
-    getEpisodes(1)
+    getEpisodes(page)
   }
 
-  const nextPageHandleClick = () => {
+  const nextPageHandleClick = (page: number) => {
     resetContent()
-    getEpisodes(2)
+    getEpisodes(page)
   }
 
   const resetContent = () => {
