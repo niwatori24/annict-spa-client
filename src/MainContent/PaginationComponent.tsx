@@ -2,7 +2,7 @@ import React from 'react'
 
 interface Pagination {
   totalCount: number
-  nextPage: number |null
+  nextPage: number | null
   prevPage: number | null
 }
 interface Props {
@@ -20,7 +20,7 @@ export const PaginationComponent: React.FC<Props> = props => {
           <div>全{props.pagination.totalCount}話</div>
           <div>
             {props.pagination.prevPage && (
-              <div><a onClick={(e) => {
+              <div><a href='#' onClick={(e) => {
                 if(props.pagination && props.pagination.prevPage) {
                   props.prevPageHandleClick(props.pagination.prevPage)
                   e.preventDefault()
@@ -28,7 +28,7 @@ export const PaginationComponent: React.FC<Props> = props => {
               }}>前のエピソードを見る</a></div>
             )}
             {props.pagination.nextPage && (
-              <div><a onClick={(e) => {
+              <div><a href='#' onClick={(e) => {
                 if(props.pagination && props.pagination.nextPage) {
                   props.nextPageHandleClick(props.pagination.nextPage)
                   e.preventDefault()
