@@ -47,9 +47,9 @@ export const MainContentBody: React.FC<Props> = props => {
         nextPage: res.data.next_page,
         prevPage: res.data.prev_page
       }))
-      res.data.episodes.map((w: any, i: number) => {
+      res.data.episodes.map((ep: any, i: number) => {
         if(list === null) { return }
-        list.push({ id: w.id, title: w.title })
+        list.push({ id: ep.id, title: ep.title, episode_number: ep.number, episode_text: ep.number_text })
       });
       setEpisodes((prev) => (list))
     }).catch(console.error);
