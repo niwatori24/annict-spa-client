@@ -17,7 +17,7 @@ export const MainContentMenu: React.FC<Props> = props => {
         { props.workList.map((work, i) => {
             return <li
               key={work.id}
-              onClick={(e) => { handleClick(work); e.preventDefault(); }}
+              onClick={(e) => { handleClick(work); e.preventDefault() }}
             ><a href='#'>{work.title}</a></li>
           })
         }
