@@ -57,10 +57,12 @@ export const MainContentBody: React.FC<Props> = props => {
   }
 
   const prevPageHandleClick = () => {
+    setEpisodes((prev) => { return null });
     getEpisodes(1)
   }
 
   const nextPageHandleClick = () => {
+    setEpisodes((prev) => { return null });
     getEpisodes(2)
   }
 
