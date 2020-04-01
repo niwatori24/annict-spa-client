@@ -4,10 +4,10 @@ import React, {
   useState
 } from 'react';
 // components
-import { PaginationComponent } from '../PaginationComponent'
 import { AnnictAPI } from '../AnnictAPI'
 import { EmptyBody } from './EmptyBody'
 import { MainContentEpisode } from './Episode'
+import { PaginationComponent } from './PaginationComponent'
 // types
 import { Work } from './../types/Work'
 import { Episode } from './../types/Episode'
