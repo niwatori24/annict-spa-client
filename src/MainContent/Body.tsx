@@ -11,6 +11,7 @@ import { PaginationComponent } from './PaginationComponent'
 // types
 import { Work } from './../types/Work'
 import { Episode } from './../types/Episode'
+import { AnnictEpisode } from './../types/AnnictEpisode'
 // libs
 import axios from 'axios'
 
@@ -47,7 +48,7 @@ export const MainContentBody: React.FC<Props> = props => {
         nextPage: res.data.next_page,
         prevPage: res.data.prev_page
       }))
-      res.data.episodes.map((ep: any, i: number) => {
+      res.data.episodes.map((ep: AnnictEpisode, i: number) => {
         if(list === null) { return }
         list.push({ id: ep.id, title: ep.title, episode_number: ep.number, episode_text: ep.number_text })
       });
