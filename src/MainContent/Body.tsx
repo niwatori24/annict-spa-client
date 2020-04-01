@@ -37,6 +37,7 @@ export const MainContentBody: React.FC<Props> = props => {
 
   const getEpisodes = () => {
     if(props.currentWork === null) { return }
+    setPagination(prev => (null))
     const url: string = AnnictAPI.episodesUrl(props.currentWork.id)
     axios.get(url, {}).then((res) => {
       let list: EpisodeList = [];
