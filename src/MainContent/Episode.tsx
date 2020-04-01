@@ -19,7 +19,7 @@ export const MainContentEpisode: React.FC<Props> = props => {
       {props.episodes && props.episodes.length > 0 && (
         <ul>
           { props.episodes.map((episode, i) => {
-            return <li key={episode.id} >{episode.title}</li>
+            return <li key={episode.id}>{episode.episode_text}:{episode.title}</li>
           })
           }
         </ul>
