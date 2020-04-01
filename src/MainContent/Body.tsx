@@ -32,13 +32,13 @@ export const MainContentBody: React.FC<Props> = props => {
   const [pagination, setPagination] = useState<PaginationType>(null)
 
   useEffect(() => {
-    setEpisodes((prev) => { return null });
+    resetContent()
     getEpisodes(1)
   }, [props.currentWork ? props.currentWork.id : props.currentWork]);
 
   const getEpisodes = (page: number) => {
     if(props.currentWork === null) { return }
-    setPagination(prev => (null))
+    resetContent()
     const url: string = AnnictAPI.episodesUrl(props.currentWork.id, page)
     axios.get(url, {}).then((res) => {
       let list: EpisodeList = [];
@@ -57,15 +57,19 @@ export const MainContentBody: React.FC<Props> = props => {
   }
 
   const prevPageHandleClick = () => {
-    setEpisodes((prev) => { return null });
+    resetContent()
     getEpisodes(1)
   }
 
   const nextPageHandleClick = () => {
-    setEpisodes((prev) => { return null });
+    resetContent()
     getEpisodes(2)
   }
 
+  const resetContent = () => {
+    setEpisodes((prev) => (null));
+    setPagination(prev => (null))
+  }
 
   return (
     <div style={{ flex: 1, background: 'yellow' }}>
