@@ -8,7 +8,7 @@ interface Props {
 
 export const MainContentMenu: React.FC<Props> = props => {
   const handleClick = (work: Work) => {
-    props.setCurrentWork(() => ({ id: work.id, title: work.title }))
+    props.setCurrentWork({ type: 'set', payload: { id: work.id, title: work.title } })
   }
 
   return (

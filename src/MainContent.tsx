@@ -9,7 +9,28 @@ import axios from 'axios';
 import { Work } from './types/Work'
 import { AnnictAPI } from './AnnictAPI'
 
-function reducer(state: Work[], action: any): Work[]  {
+interface Action {
+  type: string
+  payload: Work[]
+}
+
+interface currentWorkAction {
+  type: string
+  payload: Work
+}
+
+function currentWorkReducer(state: Work | null, action: currentWorkAction): Work | null {
+  switch (action.type) {
+    case 'set': {
+      return { id: action.payload.id, title: action.payload.title }
+    }
+    default: {
+      throw new Error()
+    }
+  }
+}
+
+function reducer(state: Work[], action: Action): Work[]  {
   switch (action.type) {
     case 'getWork':
       return action.payload
@@ -23,8 +44,7 @@ export function getWorkType() {
 }
 
 export const MainContent: React.FC = () => {
-  const [currentWork, setCurrentWork] = useState(null);
-
+  const [currentWork, setCurrentWork] = useReducer(currentWorkReducer, null)
   const [workList, workListDispatch] = useReducer(reducer, [])
 
   useEffect(() => {
