@@ -1,13 +1,16 @@
 import React, {
   useState,
   useEffect,
-  useReducer
+  useReducer,
+  createContext,
+  useContext
 } from 'react';
 import { MainContentMenu } from './MainContent/Menu'
 import { MainContentBody} from './MainContent/Body'
 import axios from 'axios';
 import { Work } from './types/Work'
 import { AnnictAPI } from './AnnictAPI'
+import { WorkListStoreProvider, store as WorkListStore } from './stores/WorkListStoreProvider'
 
 interface Action {
   type: string
@@ -45,24 +48,24 @@ export function getWorkType() {
 
 export const MainContent: React.FC = () => {
   const [currentWork, setCurrentWork] = useReducer(currentWorkReducer, null)
-  const [workList, workListDispatch] = useReducer(reducer, [])
+  const { workList, workListDispatch } = useContext(WorkListStore)
 
   useEffect(() => {
-    const url: string = AnnictAPI.worksUrl()
+    const url: string = AnnictAPI.worksUrl([])
     axios.get(url, {}).then((res) => {
       const list: Work[] = []
+      console.log(res.data)
       res.data.works.map((w: any, i: number) => {
         list.push({ id: w.id, title: w.title })
       })
+      console.log('workListDispatch on useEffect: ', workListDispatch, workList)
       workListDispatch({ type: getWorkType().type, payload: list })
-      return list
     })
   }, [])
 
   return (
     <div style={{ display: 'flex', width: '700px' }}>
       <MainContentMenu
-        workList={workList}
         setCurrentWork={setCurrentWork}
       />
       <MainContentBody currentWork={currentWork} />

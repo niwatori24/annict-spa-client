@@ -11,6 +11,7 @@ import {
   useParams
 } from 'react-router-dom'
 
+import { WorkListStoreProvider, store as WorkListStore } from './stores/WorkListStoreProvider'
 
 function App() {
   return (
@@ -35,7 +36,9 @@ function App() {
             <About/>
           </Route>
           <Route path='/'>
-            <MainContent/>
+            <WorkListStoreProvider>
+              <MainContent/>
+            </WorkListStoreProvider>
           </Route>
         </Switch>
       </div>
