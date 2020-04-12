@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 // components
 import { AnnictAPI } from '../AnnictAPI'
-import { EmptyBody } from './EmptyBody'
+import { From as WorkListSearchFrom } from './WorkListSearchFrom'
 import { MainContentEpisode } from './Episode'
 import { PaginationComponent } from './PaginationComponent'
 // types
@@ -90,10 +90,10 @@ export const MainContentBody: React.FC<Props> = props => {
             prevPageHandleClick={prevPageHandleClick}
           />
           <MainContentEpisode episodes={episodes} />
-          <a href='#' onClick={e => currentWorkDispatch({ type: CurrentWorkAction.reset.type })}>トップページを表示する</a>
+          <a href='#' onClick={e => currentWorkDispatch({ type: CurrentWorkAction.reset.type })}>作品検索フォームを表示する</a>
         </div>
       )}
-      {currentWork === null && <EmptyBody />}
+      {currentWork === null && <WorkListSearchFrom />}
     </div>
   )
 }
