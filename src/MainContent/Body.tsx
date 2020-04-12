@@ -90,11 +90,6 @@ export const MainContentBody: React.FC<Props> = props => {
             prevPageHandleClick={prevPageHandleClick}
           />
           <MainContentEpisode episodes={episodes} />
-          <PaginationComponent
-            pagination={pagination}
-            nextPageHandleClick={nextPageHandleClick}
-            prevPageHandleClick={prevPageHandleClick}
-          />
           <a href='#' onClick={e => currentWorkDispatch({ type: CurrentWorkAction.reset.type })}>トップページを表示する</a>
         </div>
       )}
