@@ -78,6 +78,10 @@ export const MainContentBody: React.FC<Props> = props => {
     setPagination(prev => (null))
   }
 
+  const showSearchForm = () => {
+    currentWorkDispatch({ type: CurrentWorkAction.reset.type })
+  }
+
   return (
     <div style={{ flex: 1, background: 'yellow' }}>
       {currentWork && (
@@ -90,7 +94,7 @@ export const MainContentBody: React.FC<Props> = props => {
             prevPageHandleClick={prevPageHandleClick}
           />
           <MainContentEpisode episodes={episodes} />
-          <a href='#' onClick={e => currentWorkDispatch({ type: CurrentWorkAction.reset.type })}>作品検索フォームを表示する</a>
+          <a href='#' onClick={(e) => { showSearchForm(); e.preventDefault() }}>作品検索フォームを表示する</a>
         </div>
       )}
       {currentWork === null && <WorkListSearchFrom />}
