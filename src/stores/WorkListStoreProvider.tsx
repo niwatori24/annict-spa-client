@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import { Work } from '../types/Work'
 import { ReducerActionType as ActionType } from '../types/General'
 import React, { createContext, useReducer, useContext } from 'react'
+import { Action as WorkListAction } from '../actions/CurrentWork'
 
 interface ContextProps {
   workList: Work[]
@@ -13,7 +14,7 @@ const { Provider } = store
 
 const reducer = (state: Work[], action: ActionType<Work[]>) => {
   switch (action.type) {
-    case 'getWork': {
+    case WorkListAction.set.type: {
       return action.payload
     }
     default: {

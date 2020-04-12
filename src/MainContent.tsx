@@ -11,11 +11,7 @@ import axios from 'axios';
 import { Work } from './types/Work'
 import { AnnictAPI } from './AnnictAPI'
 import { WorkListStoreProvider, store as WorkListStore } from './stores/WorkListStoreProvider'
-
-// 別ファイルに切り出す
-export function getWorkType() {
-  return { type: 'getWork' }
-}
+import { Action as WorkListAction } from './actions/CurrentWork'
 
 export const MainContent: React.FC = () => {
   const { workList, workListDispatch } = useContext(WorkListStore)
@@ -29,7 +25,7 @@ export const MainContent: React.FC = () => {
         list.push({ id: w.id, title: w.title })
       })
       console.log('workListDispatch on useEffect: ', workListDispatch, workList)
-      workListDispatch({ type: getWorkType().type, payload: list })
+      workListDispatch({ type: WorkListAction.set.type, payload: list })
     })
   }, [])
 

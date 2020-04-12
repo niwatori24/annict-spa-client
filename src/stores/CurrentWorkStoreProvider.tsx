@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import { Work } from '../types/Work'
 import { ReducerActionType as ActionType } from '../types/General'
 import React, { createContext, useReducer, useContext } from 'react'
+import { Action as CurrentWorkAction } from '../actions/CurrentWork'
 
 interface ContextProps {
   currentWork: Work | null
@@ -13,7 +14,7 @@ const { Provider } = store
 
 function reducer(state: Work | null, action: ActionType<Work>): Work | null {
   switch (action.type) {
-    case 'set': {
+    case CurrentWorkAction.set.type: {
       return { id: action.payload.id, title: action.payload.title }
     }
     default: {
