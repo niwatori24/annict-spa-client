@@ -48,18 +48,17 @@ export const MainContentBody: React.FC<Props> = props => {
     resetContent()
     const url: string = AnnictAPI.episodesUrl(currentWork.id, page)
     axios.get(url, {}).then((res) => {
-      let list: EpisodeList = [];
       console.log('episodeUrl res.data:', res.data)
       setPagination((prev) => ({
         totalCount: res.data.total_count,
         nextPage: res.data.next_page,
         prevPage: res.data.prev_page
       }))
-      res.data.episodes.map((ep: AnnictEpisode, i: number) => {
-        if(list === null) { return }
-        list.push({ id: ep.id, title: ep.title, episode_number: ep.number, episode_text: ep.number_text })
-      });
-      setEpisodes((prev) => (list))
+      setEpisodes((prev) => {
+        return res.data.episodes.map((ep: AnnictEpisode, i: number) => {
+          return { id: ep.id, title: ep.title, episode_number: ep.number, episode_text: ep.number_text } as Work
+        })
+      })
     }).catch(console.error);
   }
 
