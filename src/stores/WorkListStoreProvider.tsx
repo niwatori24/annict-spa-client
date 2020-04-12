@@ -10,15 +10,22 @@ interface ContextProps {
 const store = React.createContext({} as ContextProps)
 const { Provider } = store
 
-const WorkListStoreProvider = ({ children }: any ): JSX.Element => {
-  const [workList, workListDispatch] = useReducer((state: any, action: any) => {
-    switch (action.type) {
-      case 'getWork':
-        return action.payload;
-      default:
-        return [];
-    }
-  }, [])
+interface ActionType {
+  type: string
+  payload: Work[]
+}
+
+const reducer = (state: Work[], action: ActionType) => {
+  switch (action.type) {
+    case 'getWork':
+    return action.payload;
+    default:
+    return [];
+  }
+}
+
+const WorkListStoreProvider: React.StatelessComponent<{}> = ({ children }): JSX.Element => {
+  const [workList, workListDispatch] = useReducer(reducer, [])
   return <Provider value={{ workList, workListDispatch }}>{children}</Provider>
 }
 export { WorkListStoreProvider, store }
