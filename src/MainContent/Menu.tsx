@@ -1,16 +1,17 @@
 import React, { useContext } from 'react';
 import { Work } from './../types/Work'
+import { store as CurrentStore } from '../stores/CurrentWorkStoreProvider'
 import { store as WorkListStore } from '../stores/WorkListStoreProvider'
 
 interface Props {
-  setCurrentWork: Function
 }
 
 export const MainContentMenu: React.FC<Props> = props => {
-  const { workList, workListDispatch } = useContext(WorkListStore)
+  const { currentWork, currentWorkDispatch } = useContext(CurrentStore)
+  const { workList, workListDispatch }       = useContext(WorkListStore)
 
   const handleClick = (work: Work) => {
-    props.setCurrentWork({ type: 'set', payload: { id: work.id, title: work.title } })
+    currentWorkDispatch({ type: 'set', payload: { id: work.id, title: work.title } })
   }
 
   return (

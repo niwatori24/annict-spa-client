@@ -12,42 +12,12 @@ import { Work } from './types/Work'
 import { AnnictAPI } from './AnnictAPI'
 import { WorkListStoreProvider, store as WorkListStore } from './stores/WorkListStoreProvider'
 
-interface Action {
-  type: string
-  payload: Work[]
-}
-
-interface currentWorkAction {
-  type: string
-  payload: Work
-}
-
-function currentWorkReducer(state: Work | null, action: currentWorkAction): Work | null {
-  switch (action.type) {
-    case 'set': {
-      return { id: action.payload.id, title: action.payload.title }
-    }
-    default: {
-      throw new Error()
-    }
-  }
-}
-
-function reducer(state: Work[], action: Action): Work[]  {
-  switch (action.type) {
-    case 'getWork':
-      return action.payload
-    default:
-      return []
-  }
-}
-
+// 別ファイルに切り出す
 export function getWorkType() {
   return { type: 'getWork' }
 }
 
 export const MainContent: React.FC = () => {
-  const [currentWork, setCurrentWork] = useReducer(currentWorkReducer, null)
   const { workList, workListDispatch } = useContext(WorkListStore)
 
   useEffect(() => {
@@ -65,10 +35,8 @@ export const MainContent: React.FC = () => {
 
   return (
     <div style={{ display: 'flex', width: '700px' }}>
-      <MainContentMenu
-        setCurrentWork={setCurrentWork}
-      />
-      <MainContentBody currentWork={currentWork} />
+      <MainContentMenu />
+      <MainContentBody />
     </div>
   )
 }

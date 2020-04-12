@@ -1,6 +1,7 @@
 import React, {
   useMemo,
   useEffect,
+  useContext,
   useState
 } from 'react';
 // components
@@ -14,10 +15,12 @@ import { Episode } from './../types/Episode'
 import { AnnictEpisode } from './../types/AnnictEpisode'
 // libs
 import axios from 'axios'
+// store
+import { store as CurrentStore } from '../stores/CurrentWorkStoreProvider'
 
 interface Props {
-  currentWork: Work | null
 }
+
 interface Pagination {
   totalCount: number
   nextPage: number | null
@@ -28,18 +31,20 @@ type PaginationType = Pagination | null
 type EpisodeList = Episode[] | null
 
 export const MainContentBody: React.FC<Props> = props => {
+  const { currentWork, currentWorkDispatch } = useContext(CurrentStore)
+
   const [episodes, setEpisodes] = useState([] as EpisodeList)
   const [pagination, setPagination] = useState(null as PaginationType)
 
   useEffect(() => {
     resetContent()
     getEpisodes(1)
-  }, [props.currentWork ? props.currentWork.id : props.currentWork]);
+  }, [currentWork ? currentWork.id : currentWork]);
 
   const getEpisodes = (page: number) => {
-    if(props.currentWork === null) { return }
+    if(currentWork === null) { return }
     resetContent()
-    const url: string = AnnictAPI.episodesUrl(props.currentWork.id, page)
+    const url: string = AnnictAPI.episodesUrl(currentWork.id, page)
     axios.get(url, {}).then((res) => {
       let list: EpisodeList = [];
       console.log('episodeUrl res.data:', res.data)
@@ -73,10 +78,10 @@ export const MainContentBody: React.FC<Props> = props => {
 
   return (
     <div style={{ flex: 1, background: 'yellow' }}>
-      {props.currentWork && (
+      {currentWork && (
         <div>
-          <div>id: {props.currentWork.id}</div>
-          <div>title: {props.currentWork.title}</div>
+          <div>id: {currentWork.id}</div>
+          <div>title: {currentWork.title}</div>
           <PaginationComponent
             pagination={pagination}
             nextPageHandleClick={nextPageHandleClick}
@@ -90,7 +95,7 @@ export const MainContentBody: React.FC<Props> = props => {
           />
         </div>
       )}
-      {props.currentWork === null && <EmptyBody />}
+      {currentWork === null && <EmptyBody />}
     </div>
   )
 }
