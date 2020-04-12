@@ -1,11 +1,12 @@
 import React, {
   useMemo,
   useEffect,
+  useContext,
   useState
 } from 'react';
 // components
 import { AnnictAPI } from '../AnnictAPI'
-import { EmptyBody } from './EmptyBody'
+import { From as WorkListSearchFrom } from './WorkListSearchFrom'
 import { MainContentEpisode } from './Episode'
 import { PaginationComponent } from './PaginationComponent'
 // types
@@ -14,10 +15,14 @@ import { Episode } from './../types/Episode'
 import { AnnictEpisode } from './../types/AnnictEpisode'
 // libs
 import axios from 'axios'
+// store
+import { store as CurrentStore } from '../stores/CurrentWorkStoreProvider'
+// action
+import { Action as CurrentWorkAction } from '../actions/CurrentWork'
 
 interface Props {
-  currentWork: Work | null
 }
+
 interface Pagination {
   totalCount: number
   nextPage: number | null
@@ -28,18 +33,20 @@ type PaginationType = Pagination | null
 type EpisodeList = Episode[] | null
 
 export const MainContentBody: React.FC<Props> = props => {
-  const [episodes, setEpisodes] = useState<EpisodeList>([])
-  const [pagination, setPagination] = useState<PaginationType>(null)
+  const { currentWork, currentWorkDispatch } = useContext(CurrentStore)
+
+  const [episodes, setEpisodes] = useState([] as EpisodeList)
+  const [pagination, setPagination] = useState(null as PaginationType)
 
   useEffect(() => {
     resetContent()
     getEpisodes(1)
-  }, [props.currentWork ? props.currentWork.id : props.currentWork]);
+  }, [currentWork ? currentWork.id : currentWork]);
 
   const getEpisodes = (page: number) => {
-    if(props.currentWork === null) { return }
+    if(currentWork === null) { return }
     resetContent()
-    const url: string = AnnictAPI.episodesUrl(props.currentWork.id, page)
+    const url: string = AnnictAPI.episodesUrl(currentWork.id, page)
     axios.get(url, {}).then((res) => {
       let list: EpisodeList = [];
       console.log('episodeUrl res.data:', res.data)
@@ -71,26 +78,26 @@ export const MainContentBody: React.FC<Props> = props => {
     setPagination(prev => (null))
   }
 
+  const showSearchForm = () => {
+    currentWorkDispatch({ type: CurrentWorkAction.reset.type })
+  }
+
   return (
     <div style={{ flex: 1, background: 'yellow' }}>
-      {props.currentWork && (
+      {currentWork && (
         <div>
-          <div>id: {props.currentWork.id}</div>
-          <div>title: {props.currentWork.title}</div>
+          <div>id: {currentWork.id}</div>
+          <div>title: {currentWork.title}</div>
           <PaginationComponent
             pagination={pagination}
             nextPageHandleClick={nextPageHandleClick}
             prevPageHandleClick={prevPageHandleClick}
           />
           <MainContentEpisode episodes={episodes} />
-          <PaginationComponent
-            pagination={pagination}
-            nextPageHandleClick={nextPageHandleClick}
-            prevPageHandleClick={prevPageHandleClick}
-          />
+          <a href='#' onClick={(e) => { showSearchForm(); e.preventDefault() }}>作品検索フォームを表示する</a>
         </div>
       )}
-      {props.currentWork === null && <EmptyBody />}
+      {currentWork === null && <WorkListSearchFrom />}
     </div>
   )
 }

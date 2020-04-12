@@ -2,6 +2,9 @@ interface AnnictAPIType {
   episodesUrl: Function
   worksUrl: Function
 }
+export interface worksUrlParams {
+  sortValue: string | null
+}
 
 export const AnnictAPI: AnnictAPIType = {
   episodesUrl: (workId: number, page: number | null) => {
@@ -11,7 +14,18 @@ export const AnnictAPI: AnnictAPIType = {
       return `https://api.annict.com/v1/episodes?sort_sort_number=asc&access_token=${process.env.REACT_APP_ANNICT_API_TOKEN}&filter_work_id=${workId}&page=${page}`
     }
   },
-  worksUrl: () => {
-    return `https://api.annict.com/v1/works?access_token=${process.env.REACT_APP_ANNICT_API_TOKEN}`
+  worksUrl: (params: worksUrlParams) => {
+    let queryString: string = ''
+    if(params.sortValue) {
+      queryString = `${queryString}&sort_season=${params.sortValue}`
+    } else {
+      queryString = `${queryString}&sort_season=desc`
+    }
+
+    if(queryString === '') {
+      return `https://api.annict.com/v1/works?access_token=${process.env.REACT_APP_ANNICT_API_TOKEN}`
+    } else {
+      return `https://api.annict.com/v1/works?access_token=${process.env.REACT_APP_ANNICT_API_TOKEN}&${queryString}`
+    }
   }
 }
