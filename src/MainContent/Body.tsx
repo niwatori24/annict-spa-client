@@ -28,8 +28,8 @@ type PaginationType = Pagination | null
 type EpisodeList = Episode[] | null
 
 export const MainContentBody: React.FC<Props> = props => {
-  const [episodes, setEpisodes] = useState<EpisodeList>([])
-  const [pagination, setPagination] = useState<PaginationType>(null)
+  const [episodes, setEpisodes] = useState([] as EpisodeList)
+  const [pagination, setPagination] = useState(null as PaginationType)
 
   useEffect(() => {
     resetContent()
