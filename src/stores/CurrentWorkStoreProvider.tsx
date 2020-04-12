@@ -17,6 +17,9 @@ function reducer(state: Work | null, action: ActionType<Work>): Work | null {
     case CurrentWorkAction.set.type: {
       return { id: action.payload.id, title: action.payload.title }
     }
+    case CurrentWorkAction.reset.type: {
+      return null
+    }
     default: {
       throw new Error()
     }

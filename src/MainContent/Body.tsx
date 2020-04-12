@@ -17,6 +17,8 @@ import { AnnictEpisode } from './../types/AnnictEpisode'
 import axios from 'axios'
 // store
 import { store as CurrentStore } from '../stores/CurrentWorkStoreProvider'
+// action
+import { Action as CurrentWorkAction } from '../actions/CurrentWork'
 
 interface Props {
 }
@@ -93,6 +95,7 @@ export const MainContentBody: React.FC<Props> = props => {
             nextPageHandleClick={nextPageHandleClick}
             prevPageHandleClick={prevPageHandleClick}
           />
+          <a href='#' onClick={e => currentWorkDispatch({ type: CurrentWorkAction.reset.type })}>トップページを表示する</a>
         </div>
       )}
       {currentWork === null && <EmptyBody />}
