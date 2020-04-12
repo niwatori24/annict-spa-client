@@ -17,10 +17,12 @@ interface ActionType {
 
 const reducer = (state: Work[], action: ActionType) => {
   switch (action.type) {
-    case 'getWork':
-    return action.payload;
-    default:
-    return [];
+    case 'getWork': {
+      return action.payload
+    }
+    default: {
+      return []
+    }
   }
 }
 

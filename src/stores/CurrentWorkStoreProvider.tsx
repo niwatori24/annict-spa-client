@@ -12,20 +12,10 @@ const { Provider } = store
 
 interface ActionType {
   type: string
-  payload: Work[]
-}
-
-interface Action {
-  type: string
-  payload: Work[]
-}
-
-interface currentWorkAction {
-  type: string
   payload: Work
 }
 
-function reducer(state: Work | null, action: currentWorkAction): Work | null {
+function reducer(state: Work | null, action: ActionType): Work | null {
   switch (action.type) {
     case 'set': {
       return { id: action.payload.id, title: action.payload.title }
