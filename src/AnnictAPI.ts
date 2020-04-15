@@ -3,7 +3,8 @@ interface AnnictAPIType {
   worksUrl: Function
 }
 export interface worksUrlParams {
-  sortValue: string | null
+  sortValue: string
+  filterTitle: string
 }
 
 export const AnnictAPI: AnnictAPIType = {
@@ -20,6 +21,9 @@ export const AnnictAPI: AnnictAPIType = {
       queryString = `${queryString}&sort_season=${params.sortValue}`
     } else {
       queryString = `${queryString}&sort_season=desc`
+    }
+    if(params.filterTitle) {
+      queryString = `${queryString}&filter_title=${params.filterTitle}`
     }
 
     if(queryString === '') {
