@@ -33,20 +33,20 @@ function App() {
           </ul>
         </div>
 
-        <Switch>
-          <Route path='/about'>
-            <About/>
-          </Route>
-          <Route path='/'>
-            <WorkListSearchFromStoreProvider>
+        <WorkListSearchFromStoreProvider>
+          <Switch>
+            <Route path='/about'>
+              <About/>
+            </Route>
+            <Route path='/'>
               <CurrentWorkStoreProvider>
                 <WorkListStoreProvider>
                   <MainContent/>
                 </WorkListStoreProvider>
               </CurrentWorkStoreProvider>
-            </WorkListSearchFromStoreProvider>
-          </Route>
-        </Switch>
+            </Route>
+          </Switch>
+        </WorkListSearchFromStoreProvider>
       </div>
     </Router>
   );
