@@ -17,7 +17,7 @@ export const MainContent: React.FC = () => {
   const { form, formDispatch } = useContext(WorkListSearchFromStore)
 
   useEffect(() => {
-    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle } as worksUrlParams)
+    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle, page: 0 } as worksUrlParams)
     WorkListFetcher.run(lastResponseWorkListDispatch, url)
   }, [])
 

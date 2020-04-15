@@ -83,6 +83,7 @@ export const MainContentBody: React.FC<Props> = props => {
           <div>title: {currentWork.title}</div>
           <PaginationComponent
             pagination={pagination}
+            unit={'エピソード'}
             nextPageHandleClick={nextPageHandleClick}
             prevPageHandleClick={prevPageHandleClick}
           />

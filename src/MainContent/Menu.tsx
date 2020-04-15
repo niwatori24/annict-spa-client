@@ -1,22 +1,41 @@
 import React, { useContext } from 'react';
 import { Work } from './../types/Work'
 import { store as CurrentStore } from '../stores/CurrentWorkStoreProvider'
-import { store as LastResponseWorkList } from '../stores/LastResponseWorkListStoreProvider'
+import { store as LastResponseWorkListStore } from '../stores/LastResponseWorkListStoreProvider'
+import { store as WorkListSearchFromStore } from '../stores/WorkListSearchFromStoreProvider'
 import { PaginationComponent } from './PaginationComponent'
+import { AnnictAPI, worksUrlParams } from '../AnnictAPI'
+import { WorkListFetcher } from '../MainContent/AnnictAPIClient'
 
 interface Props {
 }
 
 export const MainContentMenu: React.FC<Props> = props => {
   const { currentWork, currentWorkDispatch } = useContext(CurrentStore)
-  const { lastResponseWorkList, lastResponseWorkListDispatch } = useContext(LastResponseWorkList)
+  const { lastResponseWorkList, lastResponseWorkListDispatch } = useContext(LastResponseWorkListStore)
+  const { form, formDispatch } = useContext(WorkListSearchFromStore)
 
   const handleClick = (work: Work) => {
     currentWorkDispatch({ type: 'set', payload: { id: work.id, title: work.title } })
   }
 
+  const nextPageHandleClick = (page: number) => {
+    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle, page: page } as worksUrlParams)
+    WorkListFetcher.run(lastResponseWorkListDispatch, url)
+  }
+
+  const prevPageHandleClick = (page: number) => {
+    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle, page: page } as worksUrlParams)
+    WorkListFetcher.run(lastResponseWorkListDispatch, url)
+  }
+
   return (
     <div style={{ flex: 1, background: 'red' }}>
+      {lastResponseWorkList.pagination && <PaginationComponent
+        pagination={lastResponseWorkList.pagination}
+        unit={'作品'}
+        nextPageHandleClick={nextPageHandleClick} prevPageHandleClick={prevPageHandleClick} />
+      }
       <ul>
         { lastResponseWorkList.workList && lastResponseWorkList.workList.map((work: Work, i: number) => {
             return <li

@@ -5,6 +5,7 @@ interface AnnictAPIType {
 export interface worksUrlParams {
   sortValue: string
   filterTitle: string
+  page: number
 }
 
 export const AnnictAPI: AnnictAPIType = {
@@ -24,6 +25,9 @@ export const AnnictAPI: AnnictAPIType = {
     }
     if(params.filterTitle) {
       queryString = `${queryString}&filter_title=${params.filterTitle}`
+    }
+    if(params.page) {
+      queryString = `${queryString}&page=${params.page}`
     }
 
     if(queryString === '') {
