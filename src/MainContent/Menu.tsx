@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Work } from './../types/Work'
 import { store as CurrentStore } from '../stores/CurrentWorkStoreProvider'
 import { store as WorkListStore } from '../stores/WorkListStoreProvider'
+import { PaginationComponent } from './PaginationComponent'
 
 interface Props {
 }
