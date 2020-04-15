@@ -7,6 +7,7 @@ import { Action as WorkListAction } from '../actions/CurrentWork'
 
 export const WorkListFetcher = {
   run: (dispatch: Function, url: string) => {
+    dispatch({ type: WorkListAction.reset.type })
     axios.get(url, {}).then((res) => {
       const list: Work[] = []
       console.log(res.data)

@@ -1,3 +1,4 @@
 export const Action = {
-  set: { type: 'set' }
+  set: { type: 'set' },
+  reset: { type: 'reset' }
 }

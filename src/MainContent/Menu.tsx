@@ -18,7 +18,7 @@ export const MainContentMenu: React.FC<Props> = props => {
   return (
     <div style={{ flex: 1, background: 'red' }}>
       <ul>
-        { workList.map((work: Work, i: number) => {
+        { workList && workList.map((work: Work, i: number) => {
             return <li
               key={work.id}
               onClick={(e) => { handleClick(work); e.preventDefault() }}
@@ -26,6 +26,7 @@ export const MainContentMenu: React.FC<Props> = props => {
           })
         }
       </ul>
-    </div>
-  )
+      { workList === null && <div>取得中です</div>}
+  </div>
+)
 }
