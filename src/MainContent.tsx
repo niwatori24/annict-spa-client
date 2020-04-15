@@ -8,7 +8,7 @@ import React, {
 import { MainContentMenu } from './MainContent/Menu'
 import { MainContentBody} from './MainContent/Body'
 import { WorkListFetcher } from './MainContent/AnnictAPIClient'
-import { AnnictAPI, worksUrlParams } from './AnnictAPI'
+import { AnnictAPI, WorksUrlParams } from './AnnictAPI'
 import { store as WorkListSearchFromStore } from './stores/WorkListSearchFromStoreProvider'
 import { store as LastResponseWorkListStore } from './stores/LastResponseWorkListStoreProvider'
 
@@ -17,7 +17,7 @@ export const MainContent: React.FC = () => {
   const { form, formDispatch } = useContext(WorkListSearchFromStore)
 
   useEffect(() => {
-    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle, page: 0 } as worksUrlParams)
+    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle, page: 0 } as WorksUrlParams)
     WorkListFetcher.run(lastResponseWorkListDispatch, url)
   }, [])
 

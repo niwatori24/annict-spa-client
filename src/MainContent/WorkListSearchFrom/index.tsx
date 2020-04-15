@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { Work } from '../../types/Work'
-import { AnnictAPI, worksUrlParams } from '../../AnnictAPI'
+import { AnnictAPI, WorksUrlParams } from '../../AnnictAPI'
 import { store as LastResponseWorkListStore } from '../../stores/LastResponseWorkListStoreProvider'
 import { store as WorkListSearchFromStore } from '../../stores/WorkListSearchFromStoreProvider'
 import { Action as WorkListAction } from '../../actions/CurrentWork'
@@ -13,7 +13,7 @@ export const WorkListSearchFrom: React.FC = () => {
   const { form, formDispatch } = useContext(WorkListSearchFromStore)
 
   const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
-    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle } as worksUrlParams)
+    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle } as WorksUrlParams)
     WorkListFetcher.run(lastResponseWorkListDispatch, url)
   }
   const setSortValue = (value: string) => {

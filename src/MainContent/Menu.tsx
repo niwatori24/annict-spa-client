@@ -4,7 +4,7 @@ import { store as CurrentStore } from '../stores/CurrentWorkStoreProvider'
 import { store as LastResponseWorkListStore } from '../stores/LastResponseWorkListStoreProvider'
 import { store as WorkListSearchFromStore } from '../stores/WorkListSearchFromStoreProvider'
 import { PaginationComponent } from './PaginationComponent'
-import { AnnictAPI, worksUrlParams } from '../AnnictAPI'
+import { AnnictAPI, WorksUrlParams } from '../AnnictAPI'
 import { WorkListFetcher } from '../MainContent/AnnictAPIClient'
 
 interface Props {
@@ -20,12 +20,12 @@ export const MainContentMenu: React.FC<Props> = props => {
   }
 
   const nextPageHandleClick = (page: number) => {
-    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle, page: page } as worksUrlParams)
+    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle, page: page } as WorksUrlParams)
     WorkListFetcher.run(lastResponseWorkListDispatch, url)
   }
 
   const prevPageHandleClick = (page: number) => {
-    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle, page: page } as worksUrlParams)
+    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle, page: page } as WorksUrlParams)
     WorkListFetcher.run(lastResponseWorkListDispatch, url)
   }
 
