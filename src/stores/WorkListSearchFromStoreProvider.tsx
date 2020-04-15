@@ -18,7 +18,7 @@ const reducer = (state: WorkListSearchFrom, action: ActionType<WorkListSearchFro
       if(action.payload.sortValue) {
         state.sortValue = action.payload.sortValue
       }
-      if(action.payload.filterTitle) {
+      if(action.payload.filterTitle || action.payload.filterTitle === '') {
         state.filterTitle = action.payload.filterTitle
       }
       return state
