@@ -56,12 +56,7 @@ export const MainContentBody: React.FC<Props> = props => {
     }).catch(console.error);
   }
 
-  const prevPageHandleClick = (page: number) => {
-    resetContent()
-    getEpisodes(page)
-  }
-
-  const nextPageHandleClick = (page: number) => {
+  const paginationHandleClick = (page: number) => {
     resetContent()
     getEpisodes(page)
   }
@@ -84,8 +79,8 @@ export const MainContentBody: React.FC<Props> = props => {
           <PaginationComponent
             pagination={pagination}
             unit={'エピソード'}
-            nextPageHandleClick={nextPageHandleClick}
-            prevPageHandleClick={prevPageHandleClick}
+            nextPageHandleClick={paginationHandleClick}
+            prevPageHandleClick={paginationHandleClick}
           />
           <MainContentEpisode episodes={episodes} />
           <a href='#' onClick={(e) => { showSearchForm(); e.preventDefault() }}>作品検索フォームを表示する</a>

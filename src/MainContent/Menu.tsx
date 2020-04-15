@@ -19,12 +19,7 @@ export const MainContentMenu: React.FC<Props> = props => {
     currentWorkDispatch({ type: 'set', payload: { id: work.id, title: work.title } })
   }
 
-  const nextPageHandleClick = (page: number) => {
-    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle, page: page } as WorksUrlParams)
-    WorkListFetcher.run(lastResponseWorkListDispatch, url)
-  }
-
-  const prevPageHandleClick = (page: number) => {
+  const paginationHandleClick = (page: number) => {
     const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle, page: page } as WorksUrlParams)
     WorkListFetcher.run(lastResponseWorkListDispatch, url)
   }
@@ -34,7 +29,7 @@ export const MainContentMenu: React.FC<Props> = props => {
       {lastResponseWorkList.pagination && <PaginationComponent
         pagination={lastResponseWorkList.pagination}
         unit={'作品'}
-        nextPageHandleClick={nextPageHandleClick} prevPageHandleClick={prevPageHandleClick} />
+        nextPageHandleClick={paginationHandleClick} prevPageHandleClick={paginationHandleClick} />
       }
       <ul>
         { lastResponseWorkList.workList && lastResponseWorkList.workList.map((work: Work, i: number) => {
