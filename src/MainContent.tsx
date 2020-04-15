@@ -7,26 +7,18 @@ import React, {
 } from 'react';
 import { MainContentMenu } from './MainContent/Menu'
 import { MainContentBody} from './MainContent/Body'
-import axios from 'axios';
-import { Work } from './types/Work'
-import { AnnictAPI } from './AnnictAPI'
-import { WorkListStoreProvider, store as WorkListStore } from './stores/WorkListStoreProvider'
-import { Action as WorkListAction } from './actions/CurrentWork'
+import { WorkListFetcher } from './MainContent/AnnictAPIClient'
+import { AnnictAPI, WorksUrlParams } from './AnnictAPI'
+import { store as WorkListSearchFromStore } from './stores/WorkListSearchFromStoreProvider'
+import { store as LastResponseWorkListStore } from './stores/LastResponseWorkListStoreProvider'
 
 export const MainContent: React.FC = () => {
-  const { workList, workListDispatch } = useContext(WorkListStore)
+  const { lastResponseWorkList, lastResponseWorkListDispatch } = useContext(LastResponseWorkListStore)
+  const { form, formDispatch } = useContext(WorkListSearchFromStore)
 
   useEffect(() => {
-    const url: string = AnnictAPI.worksUrl([])
-    axios.get(url, {}).then((res) => {
-      const list: Work[] = []
-      console.log(res.data)
-      res.data.works.map((w: any, i: number) => {
-        list.push({ id: w.id, title: w.title })
-      })
-      console.log('workListDispatch on useEffect: ', workListDispatch, workList)
-      workListDispatch({ type: WorkListAction.set.type, payload: list })
-    })
+    const url: string = AnnictAPI.worksUrl({ sortValue: form.sortValue, filterTitle: form.filterTitle, page: 0 } as WorksUrlParams)
+    WorkListFetcher.run(lastResponseWorkListDispatch, url)
   }, [])
 
   return (

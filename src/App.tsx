@@ -11,8 +11,9 @@ import {
   useParams
 } from 'react-router-dom'
 
-import { WorkListStoreProvider } from './stores/WorkListStoreProvider'
+import { LastResponseWorkListStoreProvider } from './stores/LastResponseWorkListStoreProvider'
 import { CurrentWorkStoreProvider } from './stores/CurrentWorkStoreProvider'
+import { WorkListSearchFromStoreProvider } from './stores/WorkListSearchFromStoreProvider'
 
 function App() {
   return (
@@ -32,18 +33,20 @@ function App() {
           </ul>
         </div>
 
-        <Switch>
-          <Route path='/about'>
-            <About/>
-          </Route>
-          <Route path='/'>
-            <CurrentWorkStoreProvider>
-              <WorkListStoreProvider>
-                <MainContent/>
-              </WorkListStoreProvider>
-            </CurrentWorkStoreProvider>
-          </Route>
-        </Switch>
+        <WorkListSearchFromStoreProvider>
+          <Switch>
+            <Route path='/about'>
+              <About/>
+            </Route>
+            <Route path='/'>
+              <CurrentWorkStoreProvider>
+                <LastResponseWorkListStoreProvider>
+                  <MainContent/>
+                </LastResponseWorkListStoreProvider>
+              </CurrentWorkStoreProvider>
+            </Route>
+          </Switch>
+        </WorkListSearchFromStoreProvider>
       </div>
     </Router>
   );
