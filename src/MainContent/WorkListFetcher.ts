@@ -6,8 +6,7 @@ import { store as WorkListStore } from '../stores/WorkListStoreProvider'
 import { Action as WorkListAction } from '../actions/CurrentWork'
 
 export const WorkListFetcher = {
-  run: (dispatch: Function) => {
-    const url: string = AnnictAPI.worksUrl([])
+  run: (dispatch: Function, url: string) => {
     axios.get(url, {}).then((res) => {
       const list: Work[] = []
       console.log(res.data)
