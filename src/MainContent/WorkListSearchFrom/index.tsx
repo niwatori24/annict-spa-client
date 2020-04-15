@@ -12,6 +12,7 @@ export const WorkListSearchFrom: React.FC = () => {
 
   const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
     const url: string = AnnictAPI.worksUrl({ sortValue: sortValue, filterTitle: filterTitle } as worksUrlParams)
+    // ここでfromのstoreに記録する
     axios.get(url, {}).then((res) => {
       const list: Work[] = []
       console.log(res.data)

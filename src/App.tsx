@@ -13,6 +13,7 @@ import {
 
 import { WorkListStoreProvider } from './stores/WorkListStoreProvider'
 import { CurrentWorkStoreProvider } from './stores/CurrentWorkStoreProvider'
+import { WorkListSearchFromStoreProvider } from './stores/WorkListSearchFromStoreProvider'
 
 function App() {
   return (
@@ -37,11 +38,13 @@ function App() {
             <About/>
           </Route>
           <Route path='/'>
-            <CurrentWorkStoreProvider>
-              <WorkListStoreProvider>
-                <MainContent/>
-              </WorkListStoreProvider>
-            </CurrentWorkStoreProvider>
+            <WorkListSearchFromStoreProvider>
+              <CurrentWorkStoreProvider>
+                <WorkListStoreProvider>
+                  <MainContent/>
+                </WorkListStoreProvider>
+              </CurrentWorkStoreProvider>
+            </WorkListSearchFromStoreProvider>
           </Route>
         </Switch>
       </div>
