@@ -27,6 +27,7 @@ export const MainContentMenu: React.FC<Props> = props => {
         }
       </ul>
       { workList === null && <div>取得中です</div>}
+      { workList && workList.length === 0 && <div>見つかりませんでした</div>}
   </div>
 )
 }
