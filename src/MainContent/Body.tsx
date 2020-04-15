@@ -13,6 +13,7 @@ import { PaginationComponent } from './PaginationComponent'
 import { Work } from './../types/Work'
 import { Episode } from './../types/Episode'
 import { AnnictEpisode } from './../types/AnnictEpisode'
+import { PaginationType } from './../types/PaginationType'
 // libs
 import axios from 'axios'
 // store
@@ -22,13 +23,6 @@ import { Action as CurrentWorkAction } from '../actions/CurrentWork'
 
 interface Props {
 }
-
-interface Pagination {
-  totalCount: number
-  nextPage: number | null
-  prevPage: number | null
-}
-type PaginationType = Pagination | null
 
 type EpisodeList = Episode[] | null
 
