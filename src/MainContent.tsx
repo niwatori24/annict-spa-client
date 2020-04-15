@@ -24,7 +24,6 @@ export const MainContent: React.FC = () => {
       res.data.works.map((w: any, i: number) => {
         list.push({ id: w.id, title: w.title })
       })
-      console.log('workListDispatch on useEffect: ', workListDispatch, workList)
       workListDispatch({ type: WorkListAction.set.type, payload: list })
     })
   }, [])

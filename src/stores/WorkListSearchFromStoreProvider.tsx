@@ -15,7 +15,13 @@ const { Provider } = store
 const reducer = (state: WorkListSearchFrom, action: ActionType<WorkListSearchFrom>) => {
   switch (action.type) {
     case WorkListSearchFromAction.set.type: {
-      return action.payload
+      if(action.payload.sortValue) {
+        state.sortValue = action.payload.sortValue
+      }
+      if(action.payload.filterTitle) {
+        state.filterTitle = action.payload.filterTitle
+      }
+      return state
     }
     default: {
       throw new Error()
