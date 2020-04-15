@@ -11,7 +11,7 @@ import {
   useParams
 } from 'react-router-dom'
 
-import { WorkListStoreProvider } from './stores/WorkListStoreProvider'
+import { LastResponseWorkListStoreProvider } from './stores/LastResponseWorkListStoreProvider'
 import { CurrentWorkStoreProvider } from './stores/CurrentWorkStoreProvider'
 import { WorkListSearchFromStoreProvider } from './stores/WorkListSearchFromStoreProvider'
 
@@ -40,9 +40,9 @@ function App() {
             </Route>
             <Route path='/'>
               <CurrentWorkStoreProvider>
-                <WorkListStoreProvider>
+                <LastResponseWorkListStoreProvider>
                   <MainContent/>
-                </WorkListStoreProvider>
+                </LastResponseWorkListStoreProvider>
               </CurrentWorkStoreProvider>
             </Route>
           </Switch>
