@@ -6,7 +6,7 @@ import { WorkListStoreProvider, store as WorkListStore } from '../../stores/Work
 import { store as WorkListSearchFromStore } from '../../stores/WorkListSearchFromStoreProvider'
 import { Action as WorkListAction } from '../../actions/CurrentWork'
 import { Action as WorkListSearchFromAction } from '../../actions/WorkListSearchFrom'
-import { WorkListFetcher } from '../../MainContent/WorkListFetcher'
+import { WorkListFetcher } from '../../MainContent/AnnictAPIClient'
 
 export const WorkListSearchFrom: React.FC = () => {
   const { workList, workListDispatch } = useContext(WorkListStore)

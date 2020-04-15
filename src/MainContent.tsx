@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { MainContentMenu } from './MainContent/Menu'
 import { MainContentBody} from './MainContent/Body'
-import { WorkListFetcher } from './MainContent/WorkListFetcher'
+import { WorkListFetcher } from './MainContent/AnnictAPIClient'
 import { store as WorkListStore } from './stores/WorkListStoreProvider'
 import { AnnictAPI, worksUrlParams } from './AnnictAPI'
 import { store as WorkListSearchFromStore } from './stores/WorkListSearchFromStoreProvider'
