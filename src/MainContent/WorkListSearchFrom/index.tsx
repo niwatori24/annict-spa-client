@@ -5,7 +5,7 @@ import { AnnictAPI, worksUrlParams } from '../../AnnictAPI'
 import { WorkListStoreProvider, store as WorkListStore } from '../../stores/WorkListStoreProvider'
 import { Action as WorkListAction } from '../../actions/CurrentWork'
 
-export const From: React.FC = () => {
+export const WorkListSearchFrom: React.FC = () => {
   const { workList, workListDispatch } = useContext(WorkListStore)
   const [sortValue, setSortValue] = useState('desc')
   const [filterTitle, setFilterTitle] = useState('')

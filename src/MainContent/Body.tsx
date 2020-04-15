@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 // components
 import { AnnictAPI } from '../AnnictAPI'
-import { From as WorkListSearchFrom } from './WorkListSearchFrom'
+import { WorkListSearchFrom } from './WorkListSearchFrom'
 import { MainContentEpisode } from './Episode'
 import { PaginationComponent } from './PaginationComponent'
 // types
